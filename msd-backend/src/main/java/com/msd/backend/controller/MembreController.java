@@ -2,13 +2,13 @@ package com.msd.backend.controller;
 
 import com.msd.backend.entity.Membre;
 import com.msd.backend.service.MembreService;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/membre") // ✅ URL PRINCIPALE
-@CrossOrigin(origins = "http://localhost:4200") // Angular
 public class MembreController {
 
     private final MembreService membreService;
@@ -36,6 +36,11 @@ public class MembreController {
     @GetMapping("/{id}")
     public Membre getMembreById(@PathVariable Long id) {
         return membreService.getMembreById(id);
+    }
+
+    @PutMapping("/{id}")
+    public Membre updateMembre(@PathVariable Long id, @RequestBody Membre membre) {
+        return membreService.updateMembre(id, membre);
     }
 
     // ✅ SUPPRIMER UN MEMBRE

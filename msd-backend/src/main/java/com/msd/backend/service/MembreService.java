@@ -1,3 +1,4 @@
+
 package com.msd.backend.service;
 
 import com.msd.backend.entity.Membre;
@@ -41,6 +42,22 @@ public class MembreService {
     public Membre getMembreById(Long id) {
         return membreRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Membre non trouvé"));
+    }
+    // MODIFIER
+
+    public Membre updateMembre(Long id, Membre membreDetails) {
+
+        Membre membre = membreRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Membre non trouvé"));
+
+        membre.setPrenom(membreDetails.getPrenom());
+        membre.setNom(membreDetails.getNom());
+        membre.setDateNaissance(membreDetails.getDateNaissance());
+        membre.setTelephone(membreDetails.getTelephone());
+        membre.setAdresse(membreDetails.getAdresse());
+        membre.setAntenne(membreDetails.getAntenne());
+
+        return membreRepository.save(membre);
     }
 
     // ✅ SUPPRIMER
