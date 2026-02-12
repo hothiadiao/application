@@ -1,5 +1,7 @@
 package com.msd.backend.entity;
 
+import java.util.List;
+
 import jakarta.persistence.*;
 import java.time.LocalDate;
 
@@ -27,6 +29,9 @@ public class Membre {
     private String telephone;
     private String adresse;
     private String antenne;
+
+    @OneToMany(mappedBy = "membre", cascade = CascadeType.ALL)
+    private List<AyantDroit> ayantsDroit;
 
     // Getters & Setters
     public Long getId() {
@@ -92,4 +97,5 @@ public class Membre {
     public void setAntenne(String antenne) {
         this.antenne = antenne;
     }
+
 }
