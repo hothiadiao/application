@@ -1,5 +1,7 @@
 package com.msd.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -16,6 +18,7 @@ public class AyantDroit {
 
     @ManyToOne
     @JoinColumn(name = "membre_id")
+    @JsonBackReference
     private Membre membre;
 
     // 🔥 AJOUTER CECI

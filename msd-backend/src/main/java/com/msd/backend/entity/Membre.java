@@ -1,6 +1,7 @@
 package com.msd.backend.entity;
 
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
@@ -31,6 +32,7 @@ public class Membre {
     private String antenne;
 
     @OneToMany(mappedBy = "membre", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<AyantDroit> ayantsDroit;
 
     // Getters & Setters

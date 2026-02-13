@@ -20,14 +20,12 @@ public class MembreService {
     // ✅ CRÉER MEMBRE + MATRICULE AUTO
     public Membre createMembre(Membre membre) {
 
-        int year = Year.now().getValue();
-
-        // nombre total de membres
+        // 🔹 Compter le nombre total de membres
         long count = membreRepository.count() + 1;
 
-        // format MYF-2026-0001
-        String matricule = String.format("MYF-%d-%04d", year, count);
-
+        // 3️⃣ Génération du matricule basé sur l'ID
+        int year = java.time.Year.now().getValue();
+        String matricule = "MSD-" + year + "-" + String.format("%04d", count);
         membre.setMatricule(matricule);
 
         return membreRepository.save(membre);
