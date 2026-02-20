@@ -50,6 +50,7 @@ public class MembreService {
 
         membre.setPrenom(membreDetails.getPrenom());
         membre.setNom(membreDetails.getNom());
+        membre.setSexe(membreDetails.getSexe());
         membre.setDateNaissance(membreDetails.getDateNaissance());
         membre.setTelephone(membreDetails.getTelephone());
         membre.setAdresse(membreDetails.getAdresse());
@@ -62,4 +63,13 @@ public class MembreService {
     public void deleteMembre(Long id) {
         membreRepository.deleteById(id);
     }
+
+    public List<Membre> searchMembres(String keyword) {
+        return membreRepository
+                .findByNomContainingIgnoreCaseOrPrenomContainingIgnoreCase(keyword, keyword);
+    }
+    /*
+     * List<Membre> getAllMembres();
+     * List<Membre> searchMembres(String keyword);
+     */
 }

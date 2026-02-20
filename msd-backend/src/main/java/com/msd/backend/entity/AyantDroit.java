@@ -13,6 +13,7 @@ public class AyantDroit {
 
     private String prenom;
     private String nom;
+    private String sexe;
     private String lien;
     private int age;
 
@@ -46,6 +47,14 @@ public class AyantDroit {
 
     public void setNom(String nom) {
         this.nom = nom;
+    }
+
+    public String getSexe() {
+        return sexe;
+    }
+
+    public void setSexe(String sexe) {
+        this.sexe = sexe;
     }
 
     public int getAge() {

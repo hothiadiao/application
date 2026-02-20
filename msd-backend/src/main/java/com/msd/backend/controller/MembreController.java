@@ -1,8 +1,10 @@
 package com.msd.backend.controller;
 
 import com.msd.backend.entity.Membre;
+import com.msd.backend.repository.MembreRepository;
 import com.msd.backend.service.MembreService;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -48,5 +50,21 @@ public class MembreController {
     @DeleteMapping("/{id}")
     public void deleteMembre(@PathVariable Long id) {
         membreService.deleteMembre(id);
+    }
+
+    @Autowired
+    private MembreRepository membreRepository;
+
+    /*
+     * @GetMapping("/search")
+     * public List<Membre> searchMembre(@RequestParam String keyword) {
+     * return membreRepository
+     * .findByNomContainingIgnoreCaseOrPrenomContainingIgnoreCase(keyword, keyword);
+     * }
+     */
+    // 🔎 Recherche
+    @GetMapping("/search")
+    public List<Membre> searchMembres(@RequestParam String keyword) {
+        return membreService.searchMembres(keyword);
     }
 }

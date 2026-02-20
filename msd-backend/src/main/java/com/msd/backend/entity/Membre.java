@@ -25,6 +25,8 @@ public class Membre {
     @Column(nullable = false)
     private String nom;
 
+    private String sexe;
+
     private LocalDate dateNaissance;
 
     private String telephone;
@@ -66,6 +68,14 @@ public class Membre {
 
     public void setNom(String nom) {
         this.nom = nom;
+    }
+
+    public String getSexe() {
+        return sexe;
+    }
+
+    public void setSexe(String sexe) {
+        this.sexe = sexe;
     }
 
     public LocalDate getDateNaissance() {
