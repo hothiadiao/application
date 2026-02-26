@@ -1,10 +1,13 @@
 package com.msd.backend.controller;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import com.msd.backend.entity.Membre;
 import com.msd.backend.repository.MembreRepository;
 import com.msd.backend.service.MembreService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,9 +31,28 @@ public class MembreController {
 
     // ✅ LISTE DES MEMBRES
     // GET http://localhost:8080/api/membre
-    @GetMapping
-    public List<Membre> getAllMembre() {
-        return membreService.getAllMembre();
+    // Pour la pagination
+    /*
+     * @GetMapping
+     * public List<Membre> getAllMembre() {
+     * return membreService.getAllMembre();
+     * }
+     */
+    @GetMapping("/membre")
+    public Page<Membre> getAllMembre(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "5") int size,
+            @RequestParam(required = false) String keyword) {
+
+        Pageable pageable = PageRequest.of(page, size);
+
+        if (keyword != null && !keyword.isEmpty()) {
+            return membreRepository
+                    .findByNomContainingIgnoreCaseOrPrenomContainingIgnoreCase(
+                            keyword, keyword, pageable);
+        }
+
+        return membreRepository.findAll(pageable);
     }
 
     // ✅ UN MEMBRE PAR ID
@@ -67,4 +89,28 @@ public class MembreController {
     public List<Membre> searchMembres(@RequestParam String keyword) {
         return membreService.searchMembres(keyword);
     }
+
+    // Pagination
+    /*
+     * @GetMapping("/membre")
+     * public Page<Membre> getMembre(
+     * 
+     * @RequestParam(defaultValue = "0") int page,
+     * 
+     * @RequestParam(defaultValue = "5") int size,
+     * 
+     * @RequestParam(required = false) String keyword) {
+     * 
+     * Pageable pageable = PageRequest.of(page, size);
+     * 
+     * if (keyword != null && !keyword.isEmpty()) {
+     * return membreRepository
+     * .findByNomContainingIgnoreCaseOrPrenomContainingIgnoreCase(
+     * keyword, keyword, pageable);
+     * }
+     * 
+     * return membreRepository.findAll(pageable);
+     * }
+     */
+
 }
