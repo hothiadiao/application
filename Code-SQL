@@ -1,0 +1,37 @@
+CREATE TABLE membre (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    matricule VARCHAR(50) NOT NULL UNIQUE,
+    prenom VARCHAR(100) NOT NULL,
+    nom VARCHAR(100) NOT NULL,
+    date_naissance DATE,
+    telephone VARCHAR(20),
+    adresse VARCHAR(255),
+    antenne VARCHAR(100)
+);
+
+
+
+CREATE TABLE IF NOT EXISTS ayant_droit (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    prenom VARCHAR(100) NOT NULL,
+    nom VARCHAR(100) NOT NULL,
+    lien VARCHAR(50),          
+    age INT,
+    membre_id BIGINT NOT NULL,  
+    CONSTRAINT fk_membre FOREIGN KEY (membre_id) REFERENCES membre(id) ON DELETE CASCADE
+);
+
+
+CREATE TABLE users (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(100) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    role VARCHAR(50) NOT NULL
+);
+
+
+
+INSERT INTO users (username, password, role)
+VALUES ('admin',
+'$2a$10$8H5mH8sKkYw...',  -- BCrypt
+'ADMIN');

@@ -8,26 +8,26 @@ import java.util.List;
 
 public interface MembreRepository extends JpaRepository<Membre, Long> {
 
-    boolean existsByMatricule(String matricule);
+        boolean existsByMatricule(String matricule);
 
-    long count();
+        long count();
 
-    /*
-     * List<Membre> findByNomContainingIgnoreCase(String nom);
-     * 
-     * List<Membre> findByPrenomContainingIgnoreCase(String prenom);
-     * 
-     * List<Membre> findByNomContainingIgnoreCaseOrPrenomContainingIgnoreCase(String
-     * nom, String prenom);
-     */
-    // Recherche par nom OU prénom (insensible à la casse)
-    List<Membre> findByNomContainingIgnoreCaseOrPrenomContainingIgnoreCase(
-            String nom,
-            String prenom);
+        /*
+         * List<Membre> findByNomContainingIgnoreCase(String nom);
+         * 
+         * List<Membre> findByPrenomContainingIgnoreCase(String prenom);
+         * 
+         * List<Membre> findByNomContainingIgnoreCaseOrPrenomContainingIgnoreCase(String
+         * nom, String prenom);
+         */
+        // Recherche par nom OU prénom (insensible à la casse)
+        List<Membre> findByNomContainingIgnoreCaseOrPrenomContainingIgnoreCase(
+                        String nom,
+                        String prenom);
 
-    Page<Membre> findByNomContainingIgnoreCaseOrPrenomContainingIgnoreCase(
-            String nom,
-            String prenom,
-            Pageable pageable);
+        Page<Membre> findByNomContainingIgnoreCaseOrPrenomContainingIgnoreCase(
+                        String nom,
+                        String prenom,
+                        Pageable pageable);
 
 }
